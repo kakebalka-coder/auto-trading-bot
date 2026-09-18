@@ -19,7 +19,7 @@ PAIRS_TO_SCAN = [
     {"symbol": "ADAUSD",   "name": "ADA/USDT"},
     {"symbol": "DOTUSD",   "name": "DOT/USDT"},
     {"symbol": "LTCUSD",   "name": "LTC/USDT"},
-    {"symbol": "POLUSD", "name": "POL/USDT"},
+    {"symbol": "POLUSD",   "name": "POL/USDT"},
     {"symbol": "LINKUSD",  "name": "LINK/USDT"},
     {"symbol": "UNIUSD",   "name": "UNI/USDT"},
     {"symbol": "AVAXUSD",  "name": "AVAX/USDT"},
@@ -78,7 +78,6 @@ def api_get_monitored(path, params=None):
         with urllib.request.urlopen(req, timeout=10) as resp:
             elapsed_ms = (time.time() - start_time) * 1000
             
-            # Предупреждение о высокой задержке
             if elapsed_ms > 1500:
                 print(f"⚠️ [ЗАДЕРЖКА СЕТИ] Kraken ответил за {elapsed_ms:.0f}ms!")
 
@@ -106,12 +105,10 @@ def get_candles_validated(pair_symbol, interval):
     if not candles or len(candles) < 2:
         return []
         
-    # Проверка актуальности данных (свежесть последней свечи)
     last_candle_time = int(candles[-1][0])
     current_time = int(datetime.now(timezone.utc).timestamp())
     delay_sec = current_time - last_candle_time
 
-    # Если последняя свеча отстает больше чем на 3 минуты (180 сек)
     if delay_sec > 180 and interval == 1:
         print(f"⚠️ [УСТАРЕВШИЕ ДАННЫЕ] Свечи {pair_symbol} отстают на {delay_sec} сек.")
         return []
@@ -261,7 +258,6 @@ def run_bot():
                 send_telegram(msg)
                 save_state(state)
 
-        # Защита от частых сбоев сети
         if consecutive_errors >= 5:
             print("❌ Слишком много ошибок сети подряд. Пауза 15 секунд для восстановления...")
             time.sleep(15)
@@ -273,3 +269,4 @@ def run_bot():
 
 if __name__ == "__main__":
     run_bot()
+    
