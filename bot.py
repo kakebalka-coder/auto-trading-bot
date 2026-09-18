@@ -19,7 +19,7 @@ PAIRS_TO_SCAN = [
     {"symbol": "ADAUSD",   "name": "ADA/USDT"},
     {"symbol": "DOTUSD",   "name": "DOT/USDT"},
     {"symbol": "LTCUSD",   "name": "LTC/USDT"},
-    {"symbol": "MATICUSD", "name": "MATIC/USDT"},
+    {"symbol": "POLUSD", "name": "POL/USDT"},
     {"symbol": "LINKUSD",  "name": "LINK/USDT"},
     {"symbol": "UNIUSD",   "name": "UNI/USDT"},
     {"symbol": "AVAXUSD",  "name": "AVAX/USDT"},
